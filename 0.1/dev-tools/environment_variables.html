@@ -8,6 +8,8 @@
       
       
       
+        <link rel="canonical" href="https://intel-retail.github.io/automated-self-checkout/0.1/dev-tools/environment_variables.html">
+      
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.2.9">
     
@@ -75,6 +77,12 @@
     <div data-md-component="announce">
       
     </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
     
     
       
@@ -1012,6 +1020,10 @@
 
 <h1 id="environment-variables-evs">Environment Variables (EVs)</h1>
 <p>The table below lists the environment variables (EVs) that can be used as inputs for the container running the inferencing pipeline.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GST profile EVs</label><label for="__tabbed_1_2">Common EVs</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>This list of EVs specifically supports the GST profile DLStreamer workloads.</p>
 <table>
 <thead>
 <tr>
@@ -1022,14 +1034,98 @@
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>PIPELINE_PROFILE</code></td>
-<td align="left">for choosing OVMS workload's pipeline profile to run</td>
-<td align="left">use <code>make list-profiles</code> to see Values</td>
+<td align="left"><code>AGGREGATE</code></td>
+<td align="left">aggregate branches of the gstreamer pipeline, if any, at the end of the pipeline</td>
+<td align="left">"", "gvametaaggregate name=aggregate", "aggregate branch. ! queue"</td>
 </tr>
 <tr>
-<td align="left"><code>RENDER_MODE</code></td>
-<td align="left">for displaying pipeline and overlay CV metadata</td>
+<td align="left"><code>BARCODE_RECLASSIFY_INTERVAL</code></td>
+<td align="left">time interval in seconds for barcode classification</td>
+<td align="left">Ex: 5</td>
+</tr>
+<tr>
+<td align="left"><code>CLASSIFICATION_OPTIONS</code></td>
+<td align="left">extra classification pipeline instruction parameters</td>
+<td align="left">"", "reclassify-interval=1 batch-size=1 nireq=4 gpu-throughput-streams=4"</td>
+</tr>
+<tr>
+<td align="left"><code>CPU_SW_DECODER</code></td>
+<td align="left">force to use software decoder for gst-launch decoding video frames in CPU</td>
+<td align="left">"force-sw-decoders=1"</td>
+</tr>
+<tr>
+<td align="left"><code>DECODE</code></td>
+<td align="left">decoding element instructions for gst-launch to use</td>
+<td align="left">Ex: "decode bin force-sw-decoders=1"</td>
+</tr>
+<tr>
+<td align="left"><code>DETECTION_OPTIONS</code></td>
+<td align="left">extra object detection pipeline instruction parameters</td>
+<td align="left">"", "gpu-throughput-streams=4 nireq=4 batch-size=1"</td>
+</tr>
+<tr>
+<td align="left"><code>GST_DEBUG</code></td>
+<td align="left">for running pipeline in gst debugging mode</td>
+<td align="left">0, 1</td>
+</tr>
+<tr>
+<td align="left"><code>GST_PIPELINE_LAUNCH</code></td>
+<td align="left">for launching gst pipeline script file path and name</td>
+<td align="left">Ex: "/home/pipeline-server/framework-pipelines/yolov5_pipeline/yolov5s.sh"</td>
+</tr>
+<tr>
+<td align="left"><code>LOG_LEVEL</code></td>
+<td align="left">log level to be set when running gst pipeline</td>
+<td align="left">ERROR, INFO, WARNING, and <a href="https://gstreamer.freedesktop.org/documentation/tutorials/basic/debugging-tools.html?gi-language=c#the-debug-log">more</a></td>
+</tr>
+<tr>
+<td align="left"><code>OCR_RECLASSIFY_INTERVAL</code></td>
+<td align="left">time interval in seconds for OCR classification</td>
+<td align="left">Ex: 5</td>
+</tr>
+<tr>
+<td align="left"><code>PARALLEL_PIPELINE</code></td>
+<td align="left">run pipeline in parallel using the tee branch</td>
+<td align="left">"", "! tee name=branch ! queue"</td>
+</tr>
+<tr>
+<td align="left"><code>PARALLEL_AGGRAGATE</code></td>
+<td align="left">aggregate parallel pipeline results together, paired use with PARALLEL_PIPELINE</td>
+<td align="left">"", "! gvametaaggregate name=aggregate ! gvametaconvert name=metaconvert add-empty-results=true ! gvametapublish name=destination file-format=2 file-path=/tmp/results/r$cid_count.jsonl ! fpsdisplaysink video-sink=fakesink sync=true --verbose branch. ! queue !"</td>
+</tr>
+<tr>
+<td align="left"><code>VA_SURFACE</code></td>
+<td align="left">use video analytics surface from the shared memory if applicable</td>
+<td align="left">"", "! "video/x-raw(memory</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>This list of EVs is common for all profiles.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Description</th>
+<th align="left">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>AUTO_SCALE_FLEX_140</code></td>
+<td align="left">allow workload to manage autoscaling</td>
 <td align="left">1, 0</td>
+</tr>
+<tr>
+<td align="left"><code>CPU_ONLY</code></td>
+<td align="left">for overriding inference to be performed on CPU only</td>
+<td align="left">1, 0</td>
+</tr>
+<tr>
+<td align="left"><code>DEVICE</code></td>
+<td align="left">for setting device to use for pipeline run</td>
+<td align="left">"GPU", "CPU", "AUTO", "MULTI</td>
 </tr>
 <tr>
 <td align="left"><code>LOW_POWER</code></td>
@@ -1037,8 +1133,23 @@
 <td align="left">1, 0</td>
 </tr>
 <tr>
-<td align="left"><code>CPU_ONLY</code></td>
-<td align="left">for overriding inference to be performed on CPU only</td>
+<td align="left"><code>OCR_DEVICE</code></td>
+<td align="left">optical character recognition device</td>
+<td align="left">"CPU", "GPU"</td>
+</tr>
+<tr>
+<td align="left"><code>PRE_PROCESS</code></td>
+<td align="left">pre process command to add for inferencing</td>
+<td align="left">"pre-process-backend=vaapi-surface-sharing", "pre-process-backend=vaapi-surface-sharing pre-process-config=VAAPI_FAST_SCALE_LOAD_FACTOR=1"</td>
+</tr>
+<tr>
+<td align="left"><code>PIPELINE_PROFILE</code></td>
+<td align="left">for choosing OVMS workload's pipeline profile to run</td>
+<td align="left">use <code>make list-profiles</code> to see Values</td>
+</tr>
+<tr>
+<td align="left"><code>RENDER_MODE</code></td>
+<td align="left">for displaying pipeline and overlay CV metadata</td>
 <td align="left">1, 0</td>
 </tr>
 <tr>
@@ -1056,28 +1167,11 @@
 <td align="left">for setting incrementing number of pipelines for running stream density</td>
 <td align="left">Ex: 1</td>
 </tr>
-<tr>
-<td align="left"><code>AUTO_SCALE_FLEX_140</code></td>
-<td align="left">allow workload to manage autoscaling</td>
-<td align="left">1, 0</td>
-</tr>
-<tr>
-<td align="left"><code>DEVICE</code></td>
-<td align="left">for setting device to use for pipeline run</td>
-<td align="left">"GPU", "CPU", "AUTO", "MULTI</td>
-</tr>
-<tr>
-<td align="left"><code>OCR_DEVICE</code></td>
-<td align="left">optical character recognition device</td>
-<td align="left">"CPU", "GPU"</td>
-</tr>
-<tr>
-<td align="left"><code>PRE_PROCESS</code></td>
-<td align="left">pre process command to add for inferencing</td>
-<td align="left">"pre-process-backend=vaapi-surface-sharing", "pre-process-backend=vaapi-surface-sharing pre-process-config=VAAPI_FAST_SCALE_LOAD_FACTOR=1"</td>
-</tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
 <h2 id="applying-ev-to-run-pipeline">Applying EV to Run Pipeline</h2>
 <p>EV can be applied in two ways:</p>
 <div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">parameter</span><span class="w"> </span><span class="kr">input</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="kr">run</span><span class="mf">.</span><span class="n">sh</span><span class="w"> </span><span class="n">script</span>
@@ -1176,7 +1270,7 @@ PIPELINE_PROFILE="object_detection" CPU_ONLY=1 RENDER_MODE=0 sudo -E ./run.sh --
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate", "navigation.tabs", "navigation.tabs.sticky", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "navigation.top", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate", "navigation.tabs", "navigation.tabs.sticky", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "navigation.top", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.6e54b5cd.min.js"></script>
