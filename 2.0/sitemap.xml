@@ -126,11 +126,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://intel-retail.github.io/automated-self-checkout/2.0/dev-tools/documentation.html</loc>
-         <lastmod>2024-01-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://intel-retail.github.io/automated-self-checkout/2.0/dev-tools/environment_variables.html</loc>
          <lastmod>2024-01-18</lastmod>
          <changefreq>daily</changefreq>
