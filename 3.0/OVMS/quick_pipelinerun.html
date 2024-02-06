@@ -1072,13 +1072,15 @@
 <ol>
 <li>
 <p>Download the video files to the <strong>sample-media</strong> directory:
-    <code>cd benchmark-scripts;
+    <code>bash
+    cd benchmark-scripts;
     ./download_sample_videos.sh;
     cd ..;</code></p>
 <div class="admonition example">
 <p class="admonition-title">Example - Specify Resolution and Framerate</p>
 <p>This example downloads a sample video for 1080p@15fps.
-<code>cd benchmark-scripts;
+<code>bash
+cd benchmark-scripts;
 ./download_sample_videos.sh 1920 1080 15;
 cd ..;</code></p>
 </div>
@@ -1089,11 +1091,13 @@ cd ..;</code></p>
 </li>
 <li>
 <p>After the video files are downloaded to the <strong>sample-media</strong> folder, start the camera simulator:
-    <code>make run-camera-simulator</code></p>
+    <code>bash
+    make run-camera-simulator</code></p>
 </li>
 <li>
 <p>Wait for few seconds, and then check if the camera-simulator containers are running:
-    <code>docker ps --format 'table{{.Image}}\t{{.Status}}\t{{.Names}}'</code></p>
+    <code>bash
+    docker ps --format 'table{{.Image}}\t{{.Status}}\t{{.Names}}'</code></p>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
 <p>Your output is as follows:</p>
@@ -1134,11 +1138,13 @@ cd ..;</code></p>
 <ol>
 <li>
 <p>Use the following command to run instance segmentation using OVMS on core.</p>
-<p><code>PIPELINE_PROFILE="instance_segmentation" RENDER_MODE=1 sudo -E ./run.sh --platform core --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
+<p><code>bash
+PIPELINE_PROFILE="instance_segmentation" RENDER_MODE=1 sudo -E ./run.sh --platform core --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
 </li>
 <li>
 <p>Check the status of the pipeline.</p>
-<p><code>docker ps --format 'table{{.Image}}\t{{.Status}}\t{{.Names}}' -a</code></p>
+<p><code>bash
+docker ps --format 'table{{.Image}}\t{{.Status}}\t{{.Names}}' -a</code></p>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
 <p>Here is a sample output:</p>
@@ -1165,7 +1171,8 @@ cd ..;</code></p>
 <ol>
 <li>
 <p>check the docker logs using following command to see if there is an issue with the container</p>
-<p><code>docker logs &lt;containerName&gt;</code></p>
+<p><code>bash
+docker logs &lt;containerName&gt;</code></p>
 </li>
 <li>
 <p>check ovms log in automated-self-checkout/results/r0.jsonl</p>
@@ -1224,7 +1231,8 @@ cd ..;</code></p>
 <h2 id="stop-running-the-pipelines">Stop running the pipelines</h2>
 <ol>
 <li>To stop the instance segmentation container and clean up, run 
-    <code>make clean-all</code></li>
+    <code>bash
+    make clean-all</code></li>
 </ol>
 
               

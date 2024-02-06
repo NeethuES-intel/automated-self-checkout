@@ -1090,7 +1090,8 @@
 </li>
 <li>
 <p>Run the <code>benchmark.sh</code> shell script which can be found in the <strong>base</strong>/<strong>benchmark_scripts</strong> directory. The following example runs multiple pipelines benchmarking for the <strong>object detection</strong> pipelines.</p>
-<p><code>cd ./benchmark_scripts
+<p><code>bash
+cd ./benchmark_scripts
 PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --pipelines &lt;number of pipelines&gt; --logdir &lt;output dir&gt;/data --init_duration 30 --duration 120 --platform &lt;core|xeon|dgpu.x&gt; --inputsrc &lt;ex:4k rtsp stream with 10 objects&gt;</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1103,7 +1104,8 @@ PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --pipel
 <ul>
 <li>
 <p><strong>Real Time Streaming Protocol (RTSP)</strong></p>
-<p><code>--inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
+<p><code>bash
+ --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Using RTSP source with <code>benchmark.sh</code> will automatically run the camera simulator. The camera simulator will start an RTSP stream for each video file in the <strong>sample-media</strong> folder.</p>
@@ -1111,16 +1113,19 @@ PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --pipel
 </li>
 <li>
 <p><strong>USB Camera</strong></p>
-<p><code>--inputsrc /dev/video&lt;N&gt;, where N is 0 or an integer</code></p>
+<p><code>bash
+--inputsrc /dev/video&lt;N&gt;, where N is 0 or an integer</code></p>
 </li>
 <li>
 <p><strong>Intel® RealSense™ Camera</strong></p>
-<p><code>--inputsrc &lt;RealSense camera serial number&gt;</code></p>
+<p><code>bash
+--inputsrc &lt;RealSense camera serial number&gt;</code></p>
 <p>To know the serial number of the Intel® RealSense™ Camera, refer to <a href="camera_serial_number.html">Get Serial Number of Intel® RealSense™ Camera</a>.</p>
 </li>
 <li>
 <p><strong>Video File</strong></p>
-<p><code>--inputsrc file:my_video_file.mp4</code></p>
+<p><code>bash
+--inputsrc file:my_video_file.mp4</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Video files must be in the <strong>sample-media</strong> folder, so that the Docker container can access the files. You can provide your own video files or download a sample video file using the script <a href="https://github.com/intel-retail/automated-self-checkout/blob/main/benchmark-scripts/download_sample_videos.sh">download_sample_videos.sh</a>.</p>
@@ -1156,7 +1161,8 @@ PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --pipel
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Here is an example of running benchmarking object detection pipelines with specified number of pipelines:</p>
-<p><code>PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --pipelines &lt;number of pipelines&gt; --logdir &lt;output dir&gt;/data --init_duration 30 --duration 120 --platform &lt;core|xeon|dgpu.x&gt; --inputsrc &lt;ex:4k rtsp stream with 10 objects&gt;</code></p>
+<p><code>bash
+PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --pipelines &lt;number of pipelines&gt; --logdir &lt;output dir&gt;/data --init_duration 30 --duration 120 --platform &lt;core|xeon|dgpu.x&gt; --inputsrc &lt;ex:4k rtsp stream with 10 objects&gt;</code></p>
 <p>where, the configurable input parameters include: </p>
 <ul>
 <li><code>--performance_mode</code> configures the scaling governor of the system. Supported modes are performance and powersave (default).</li>
@@ -1169,7 +1175,8 @@ PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --pipel
 <p class="admonition-title">Example</p>
 <p>You can run multiple pipeline benchmarking with different configurations before consolidating all pipeline output results.</p>
 <p>To get the consolidated pipeline results, run the following <code>make</code> command:</p>
-<p><code>make consolidate ROOT_DIRECTORY=&lt;output dir&gt;</code></p>
+<p><code>bash
+make consolidate ROOT_DIRECTORY=&lt;output dir&gt;</code></p>
 <p>This command will consolidate the performance metrics that exist in the specified <code>ROOT_DIRECTORY</code>. </p>
 <p>Here is an example of consolidated output: </p>
 <div class="admonition success">
@@ -1201,10 +1208,12 @@ PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --pipel
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Stream density benchmark script in golang</label><label for="__tabbed_1_2">Stream density benchmark script in python</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><code>PIPELINE_PROFILE="grpc_go" sudo -E ./benchmark.sh --stream_density 14.9 --logdir mytest/data --duration 60 --init_duration 20 --platform core --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
+<p><code>bash
+PIPELINE_PROFILE="grpc_go" sudo -E ./benchmark.sh --stream_density 14.9 --logdir mytest/data --duration 60 --init_duration 20 --platform core --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
 </div>
 <div class="tabbed-block">
-<p><code>PIPELINE_PROFILE="grpc_python" sudo -E ./benchmark.sh --stream_density 14.9 --logdir mytest/data --duration 60 --init_duration 60 --platform core --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
+<p><code>bash
+PIPELINE_PROFILE="grpc_python" sudo -E ./benchmark.sh --stream_density 14.9 --logdir mytest/data --duration 60 --init_duration 60 --platform core --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
 </div>
 </div>
 </div>

@@ -1146,23 +1146,28 @@ ssd_mobilenet_v1_coco
 <ol>
 <li>
 <p>Build the python app and profile-launcher:</p>
-<p><code>make build-python-apps</code></p>
+<p><code>bash
+ make build-python-apps</code></p>
 </li>
 <li>
 <p>Download sample video files:</p>
-<p><code>cd benchmark-scripts/ &amp;&amp; ./download_sample_videos.sh &amp;&amp; cd ..</code></p>
+<p><code>bash
+cd benchmark-scripts/ &amp;&amp; ./download_sample_videos.sh &amp;&amp; cd ..</code></p>
 </li>
 <li>
 <p>Start simulator camera if not started:</p>
-<p><code>make run-camera-simulator</code></p>
+<p><code>bash
+make run-camera-simulator</code></p>
 </li>
 <li>
 <p>(Optional) Run MQTT broker:</p>
-<p><code>docker run --network host --rm -d -it -p 1883:1883 -p 9001:9001 eclipse-mosquitto</code></p>
+<p><code>bash
+docker run --network host --rm -d -it -p 1883:1883 -p 9001:9001 eclipse-mosquitto</code></p>
 </li>
 <li>
 <p>Start the object detection pipeline:</p>
-<p><code>PIPELINE_PROFILE="object_detection" RENDER_MODE=1 MQTT=127.0.0.1:1883 sudo -E ./run.sh --platform core --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
+<p><code>bash
+PIPELINE_PROFILE="object_detection" RENDER_MODE=1 MQTT=127.0.0.1:1883 sudo -E ./run.sh --platform core --inputsrc rtsp://127.0.0.1:8554/camera_0</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Remove the MQTT environment variable if not using it.</p>
@@ -1176,11 +1181,13 @@ ssd_mobilenet_v1_coco
 <ol>
 <li>
 <p>To stop and clean up the client side containers, run:</p>
-<p><code>make clean-profile-launcher</code></p>
+<p><code>bash
+make clean-profile-launcher</code></p>
 </li>
 <li>
 <p>To stop and clean up everything, run:</p>
-<p><code>make clean-all</code></p>
+<p><code>bash
+make clean-all</code></p>
 </li>
 </ol>
 </li>

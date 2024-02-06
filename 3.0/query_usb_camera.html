@@ -988,12 +988,14 @@
 </li>
 <li>
 <p>Install the necessary libraries</p>
-<p><code>sudo apt update
+<p><code>bash
+sudo apt update
 sudo apt install v4l-utils -y</code></p>
 </li>
 <li>
 <p>List available video cameras </p>
-<p><code>ls -l /dev/vid*</code></p>
+<p><code>bash
+ls -l /dev/vid*</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To get information about the development video ids, check the <a href="images/list_dev_videos.png"><img alt="List dev video ids" src="images/list_dev_videos.png" /></a></p>
@@ -1001,7 +1003,8 @@ sudo apt install v4l-utils -y</code></p>
 </li>
 <li>
 <p>Execute a video, from the available list, for more information</p>
-<p><code>v4l2-ctl --list-formats-ext -d /dev/video0</code></p>
+<p><code>bash
+v4l2-ctl --list-formats-ext -d /dev/video0</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Here is information on how to <a href="images/execute_a_dev_video.png"><img alt="Execute a dev video" src="images/execute_a_dev_video.png" /></a>.</p>
@@ -1011,7 +1014,8 @@ sudo apt install v4l-utils -y</code></p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Here is an example to run the pipeline with a USB camera on video0 for the core system:
-<code>sudo ./run.sh --platform core --inputsrc /dev/video0</code></p>
+<code>bash
+sudo ./run.sh --platform core --inputsrc /dev/video0</code></p>
 </div>
 
               

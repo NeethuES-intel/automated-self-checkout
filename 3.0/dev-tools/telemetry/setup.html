@@ -999,7 +999,8 @@
 <ol>
 <li>
 <p>Build Telegraf docker image</p>
-<p><code>make build-telegraf</code></p>
+<p><code>bash
+make build-telegraf</code></p>
 </li>
 <li>
 <p>Run InfluxDB and Telegraf. Set password for InfluxDB as env variable in command line:</p>
@@ -1007,7 +1008,8 @@
 <p class="admonition-title">Note</p>
 <p>Password must be at least 8 characters in length.</p>
 </div>
-<p><code>make INFLUXPASS=yourpass run-telegraf</code></p>
+<p><code>bash
+make INFLUXPASS=yourpass run-telegraf</code></p>
 </li>
 <li>
 <p>Start the dashboard by opening a browser to <a href="http://127.0.0.1:8086" target="_blank">http://127.0.0.1:8086</a> and login using username: <strong>telegraf</strong> and the password you set previously.</p>

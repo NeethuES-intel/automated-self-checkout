@@ -1087,13 +1087,15 @@
 <ol>
 <li>
 <p>Download the video files to the <strong>sample-media</strong> directory:
-    <code>cd benchmark-scripts;
+    <code>bash
+    cd benchmark-scripts;
     ./download_sample_videos.sh;
     cd ..;</code></p>
 <div class="admonition example - specify resolution and framerate">
 <p class="admonition-title">Example</p>
 <p>This example downloads a sample video for 1080p@15fps.
-<code>cd benchmark-scripts;
+<code>bash
+   cd benchmark-scripts;
    ./download_sample_videos.sh 1920 1080 15;
    cd ..;</code> </p>
 </div>
@@ -1104,11 +1106,13 @@
 </li>
 <li>
 <p>After the video files are downloaded to the <strong>sample-media</strong> folder, start the camera simulator:
-    <code>make run-camera-simulator</code></p>
+    <code>bash
+    make run-camera-simulator</code></p>
 </li>
 <li>
 <p>Wait for few seconds, and then check if the camera-simulator containers are running:
-    <code>docker ps --format 'table{{.Image}}\t{{.Status}}\t{{.Names}}'</code></p>
+    <code>bash
+    docker ps --format 'table{{.Image}}\t{{.Status}}\t{{.Names}}'</code></p>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
 <p>Your output is as follows:</p>
@@ -1148,7 +1152,8 @@
 <ol>
 <li>
 <p>The camera simulator may be stopped and cleaned up by running </p>
-<p><code>make clean-simulator</code></p>
+<p><code>bash
+make clean-simulator</code></p>
 </li>
 </ol>
 

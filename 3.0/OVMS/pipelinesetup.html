@@ -1001,16 +1001,18 @@
 <ol>
 <li>
 <p>Clone the repository</p>
-<p><code>git clone  https://github.com/intel-retail/automated-self-checkout.git &amp;&amp; cd ./automated-self-checkout</code></p>
+<p><code>bash
+git clone  https://github.com/intel-retail/automated-self-checkout.git &amp;&amp; cd ./automated-self-checkout</code></p>
 </li>
 <li>
 <p>Build the profile launcher binary executable</p>
-<p><code>make build-profile-launcher</code></p>
+<p><code>bash
+make build-profile-launcher</code></p>
 <p>Each profile is an unique pipeline use case.  We provide some profile examples, and the configuration examples of profiles <a href="https://github.com/intel-retail/automated-self-checkout/tree/main/configs/opencv-ovms/cmd_client/res">are located here</a>.  <a href="profileLauncherConfigs.html">Go here</a> to find out the detail descriptions for the configuration of profile used by profile launcher.</p>
 </li>
 <li>
 <p>Build the benchmark Docker images</p>
-<p>```
+<p>```bash
 cd benchmark-scripts
 make build-all</p>
 <p>cd ..
@@ -1035,7 +1037,8 @@ make build-all</p>
 <p class="admonition-title">Note</p>
 <p>The model downloader script is automatically called as part of run.sh.</p>
 </div>
-<p><code>./download_models/getModels.sh</code></p>
+<p><code>bash
+./download_models/getModels.sh</code></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Depending on your internet connection, this might take some time.</p>
@@ -1047,7 +1050,8 @@ make build-all</p>
 <p class="admonition-title">Note</p>
 <p>The sample image downloader script is automatically called as part of run.sh. </p>
 </div>
-<p><code>./configs/opencv-ovms/scripts/image_download.sh</code></p>
+<p><code>bash
+./configs/opencv-ovms/scripts/image_download.sh</code></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Depending on your internet connection, this might take some time.</p>
@@ -1056,9 +1060,11 @@ make build-all</p>
 <li>
 <p>(optional) Download the bit model manually </p>
 <p>a. Here is the command to build the container for bit model downloading:</p>
-<p><code>docker build -f Dockerfile.bitModel -t bit_model_downloader:dev .</code></p>
+<p><code>bash
+docker build -f Dockerfile.bitModel -t bit_model_downloader:dev .</code></p>
 <p>b. Here is the script to run the container that downloads the bit models:</p>
-<p><code>docker run bit_model_downloader:dev</code></p>
+<p><code>bash
+docker run bit_model_downloader:dev</code></p>
 </li>
 <li>
 <p>Build the reference design images. This table shows the commands for the OpenVINO (OVMS) model Server and profile-launcher build command:</p>
@@ -1094,7 +1100,8 @@ make build-all</p>
 <div class="admonition proxy">
 <p class="admonition-title">Proxy</p>
 <p>If docker build system requires a proxy network, just set your proxy env standard way on your terminal as below and make build:</p>
-<p><code>export HTTP_PROXY="http://your-proxy-url.com:port"
+<p><code>bash
+export HTTP_PROXY="http://your-proxy-url.com:port"
 export HTTPS_PROXY="https://your-proxy-url.com:port"
 make build-ovms-server
 make build-profile-launcher</code></p>

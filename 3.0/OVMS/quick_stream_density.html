@@ -1074,7 +1074,8 @@ to bench-mark the maximum number of multiple running pipelines at the same time 
 <h3 id="stop-all-other-running-pipelines">Stop All Other Running Pipelines</h3>
 <p>To make sure we have a good stream density benchmarking, it is recommended to stop all other running pipelines before running the stream density.
 To stop all running pipelines and clean up, run
-    <code>make clean-all</code></p>
+    <code>bash
+    make clean-all</code></p>
 <h3 id="build-benchmark-docker-images">Build Benchmark Docker Images</h3>
 <p>For running stream density, the benchmark scripts are utilized.  To set up the benchmarking, we need to build the benchmark Docker images first.</p>
 <ol>
@@ -1084,7 +1085,8 @@ To stop all running pipelines and clean up, run
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Intel® integrated and Arc™ GPUs</label><label for="__tabbed_1_2">Intel® Flex GPUs</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><code>cd ./benchmark-scripts
+<p><code>bash
+cd ./benchmark-scripts
 make build-benchmark
 make build-igt</code></p>
 <div class="admonition success">
@@ -1093,7 +1095,8 @@ make build-igt</code></p>
 </div>
 </div>
 <div class="tabbed-block">
-<p><code>cd ./benchmark-scripts
+<p><code>bash
+cd ./benchmark-scripts
 make build-benchmark
 make build-xpu</code></p>
 <div class="admonition success">
@@ -1116,7 +1119,8 @@ make build-xpu</code></p>
 <ol>
 <li>
 <p>To run the stream density, the benchmark shell script, <code>benchmark.sh</code>, is used. The script is in the <strong>&lt;project_base_dir&gt;</strong>/<strong>benchmark-scripts</strong> directory.  Use the following command to run objection detection pipeline profile using OVMS on core.</p>
-<p><code>cd ./benchmark-scripts
+<p><code>bash
+cd ./benchmark-scripts
 PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --stream_density 15.0 --logdir object_detection/data --duration 120 --init_duration 40 --platform core --inputsrc rtsp://127.0.0.1:8554/camera_1</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1166,7 +1170,8 @@ PIPELINE_PROFILE="object_detection" RENDER_MODE=0 sudo -E ./benchmark.sh --strea
 <p>The benchmark.sh script automatically cleans all running Docker containers after it is done.</p>
 </div>
 <p>If the hardware supports, then one can also run the benchmarking on different devices like CPU or GPU.  This can be done through the environment variable <code>DEVICE</code>.  The following is an example to run the object_detection profile using GPU:</p>
-<p><code>PIPELINE_PROFILE="object_detection" RENDER_MODE=0 DEVICE="GPU" sudo -E ./benchmark.sh --stream_density 14.95 --logdir object_detection/data --duration 120 --init_duration 40 --platform dgpu.0 --inputsrc rtsp://127.0.0.1:8554/camera_1</code></p>
+<p><code>bash
+PIPELINE_PROFILE="object_detection" RENDER_MODE=0 DEVICE="GPU" sudo -E ./benchmark.sh --stream_density 14.95 --logdir object_detection/data --duration 120 --init_duration 40 --platform dgpu.0 --inputsrc rtsp://127.0.0.1:8554/camera_1</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The performance of running object detection benchmarking should be better while running on GPU using model precision FP32.  If supported, then you can change the model precision by going to the folder <code>configs/opencv-ovms/models/2022</code> from the root of project folder and editing the <code>base_path</code> for that particular model in the <code>config_template.json</code> file.  For example, you can change the the base_path of <code>FP32</code> to <code>FP16</code> assuming the precision <code>FP16</code> of the model is available: </p>
@@ -1195,7 +1200,8 @@ ssd_mobilenet_v1_coco
 <li>
 <p>Check the output in the base <code>results</code> directory.</p>
 <p>After the stream density is done, the results of stream density can be seen on the base directory of the <code>results</code> directory:</p>
-<p><code>cat ../results/stream_density.log</code></p>
+<p><code>bash
+cat ../results/stream_density.log</code></p>
 <div class="admonition example">
 <p class="admonition-title">Example - results/stream_density.log sample</p>
 <p>The output in results/stream_density.log file gives the detailed information of stream density results:

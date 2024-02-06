@@ -1101,11 +1101,13 @@
 <ol>
 <li>
 <p>Find all the installed kernels</p>
-<p><code>dpkg --list | grep -E -i --color 'linux-image|linux-headers'</code></p>
+<p><code>bash
+    dpkg --list | grep -E -i --color 'linux-image|linux-headers'</code></p>
 </li>
 <li>
 <p>Then remove the unsupported kernels. The example below will remove the installed kernel 5.19:</p>
-<p><code>sudo apt-get purge -f 'linux--5.19'</code></p>
+<p><code>bash
+    sudo apt-get purge -f 'linux--5.19'</code></p>
 </li>
 </ol>
 </div>
@@ -1137,11 +1139,13 @@
 <ol>
 <li>
 <p>Find all the installed kernels</p>
-<p><code>dpkg --list | grep -E -i --color 'linux-image|linux-headers'</code></p>
+<p><code>bash
+    dpkg --list | grep -E -i --color 'linux-image|linux-headers'</code></p>
 </li>
 <li>
 <p>Then remove the unsupported kernels. The example below will remove the installed kernel 5.19:</p>
-<p><code>sudo apt-get purge -f 'linux--5.19'</code></p>
+<p><code>bash
+    sudo apt-get purge -f 'linux--5.19'</code></p>
 </li>
 </ol>
 </div>
