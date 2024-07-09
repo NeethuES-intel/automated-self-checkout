@@ -14,8 +14,6 @@ services:
     ports:
       - "127.0.0.1:8554:8554"
   camera-simulator0:
-    build:
-      context: .
     image: openvino/ubuntu20_data_runtime:2021.4.2
     container_name: camera-simulator0
     network_mode: "host"
@@ -43,15 +41,15 @@ services:
     network_mode: "host"
     entrypoint: /script/entrypoint.sh --pipeline_script_choice ${PIPELINE_SCRIPT:-yolov5s.sh}
     privileged: true
+    ipc: "host"
     env_file:
       - ./res/gst.env
-      - ${DEVICE_ENV:-res/yolov5-cpu.env}
+      - ${DEVICE_ENV:-res/all-cpu.env}
     environment:
       - CONTAINER_NAME="gst0"
       - INPUTSRC=${INPUTSRC:-rtsp://localhost:8554/camera_0}
       - RENDER_MODE=${RENDER_MODE:-0} #RENDER_MODE=1 will work only after running xhost +local:docker
       - DISPLAY=$DISPLAY
-      - DEVICE=${DEVICE:-CPU}
     volumes:
       - ${RESULTS_DIR:-../results}:/tmp/results
       - ~/.Xauthority:/home/dlstreamer/.Xauthority

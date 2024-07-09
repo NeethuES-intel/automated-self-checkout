@@ -3,12 +3,13 @@
 
 .PHONY: build build-realsense run down
 .PHONY: build-telegraf run-telegraf run-portainer clean-all clean-results clean-telegraf clean-models down-portainer
-.PHONY: download-models clean-test run-demo stop-demo
+.PHONY: download-models clean-test run-demo run-headless
 
 MKDOCS_IMAGE ?= asc-mkdocs
 PIPELINE_COUNT ?= 1
 TARGET_FPS ?= 14.95
 DOCKER_COMPOSE ?= docker-compose.yml
+RESULTS_DIR ?= $(PWD)/results
 
 download-models:
 	./download_models/downloadModels.sh
@@ -52,6 +53,12 @@ run-demo: | download-models update-submodules download-sample-videos
 	@echo Running automated self checkout pipeline
 	$(MAKE) run-render-mode
 
+run-headless: | download-models update-submodules download-sample-videos
+	@echo "Building automated self checkout app"
+	$(MAKE) build
+	@echo Running automated self checkout pipeline
+	$(MAKE) run
+
 build-benchmark:
 	cd performance-tools && $(MAKE) build-benchmark-docker
 
@@ -59,7 +66,7 @@ benchmark: build-benchmark download-models
 	cd performance-tools/benchmark-scripts && python benchmark.py --compose_file ../../src/docker-compose.yml --pipeline $(PIPELINE_COUNT)
 
 benchmark-stream-density: build-benchmark download-models
-	cd performance-tools/benchmark-scripts && python benchmark.py --compose_file ../../src/docker-compose.yml --target_fps $(TARGET_FPS)
+	cd performance-tools/benchmark-scripts && python benchmark.py --compose_file ../../src/docker-compose.yml --target_fps $(TARGET_FPS) --density_increment 1 --results_dir $(RESULTS_DIR)
 
 build-telegraf:
 	cd telegraf && $(MAKE) build
@@ -112,3 +119,9 @@ serve-docs: docs-builder-image
 
 clean-docs:
 	rm -rf docs/
+
+helm-package:
+	helm package helm/ -u -d .deploy
+	helm package helm/
+	helm repo index .
+	helm repo index --url https://github.com/intel-retail/automated-self-checkout .
